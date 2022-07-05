@@ -1,5 +1,7 @@
 package golang_united_school_homework
 
+import "errors"
+
 // box contains list of shapes and able to perform operations on them
 type box struct {
 	shapes         []Shape
@@ -16,7 +18,13 @@ func NewBox(shapesCapacity int) *box {
 // AddShape adds shape to the box
 // returns the error in case it goes out of the shapesCapacity range.
 func (b *box) AddShape(shape Shape) error {
-	panic("to much shapes inside the box")
+	if b.shapesCapacity <= len(b.shapes) {
+		return errors.New("to much shapes inside the box")
+	} else {
+		b.shapes = append(b.shapes, shape)
+	}
+	return nil
+	//panic("implement me")
 }
 
 // GetByIndex allows getting shape by index
@@ -42,19 +50,26 @@ func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
 
 // SumPerimeter provides sum perimeter of all shapes in the list.
 func (b *box) SumPerimeter() float64 {
-	panic("implement me")
-
+	var sumPerimeter float64 = 0
+	for i := range b.shapes {
+		sumPerimeter += b.shapes[i].CalcArea()
+	}
+	return sumPerimeter
+	panic("something went really wrong")
 }
 
 // SumArea provides sum area of all shapes in the list.
 func (b *box) SumArea() float64 {
-	panic("implement me")
-
+	var sumArea float64 = 0
+	for i := range b.shapes {
+		sumArea += b.shapes[i].CalcArea()
+	}
+	return sumArea
+	panic("something went really wrong")
 }
 
 // RemoveAllCircles removes all circles in the list
 // whether circles are not exist in the list, then returns an error
 func (b *box) RemoveAllCircles() error {
 	panic("implement me")
-
 }
