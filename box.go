@@ -1,6 +1,5 @@
 package golang_united_school_homework
 
-
 // box contains list of shapes and able to perform operations on them
 type box struct {
 	shapes         []Shape
@@ -17,7 +16,7 @@ func NewBox(shapesCapacity int) *box {
 // AddShape adds shape to the box
 // returns the error in case it goes out of the shapesCapacity range.
 func (b *box) AddShape(shape Shape) error {
-	panic("implement me")
+	panic("to much shapes inside the box")
 }
 
 // GetByIndex allows getting shape by index
