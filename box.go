@@ -2,6 +2,10 @@ package golang_united_school_homework
 
 import "errors"
 
+const (
+	errMesIndexOutRange = "index doesn't exist or out of the range"
+)
+
 // box contains list of shapes and able to perform operations on them
 type box struct {
 	shapes         []Shape
@@ -31,7 +35,7 @@ func (b *box) AddShape(shape Shape) error {
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) GetByIndex(i int) (Shape, error) {
 	if len(b.shapes) - 1 < i || i < 0 {
-		return nil, errors.New("index doesn't exist or out of the range")
+		return nil, errors.New(errMesIndexOutRange)
 	} else {
 		return b.shapes[i], nil
 	}
@@ -42,7 +46,7 @@ func (b *box) GetByIndex(i int) (Shape, error) {
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) ExtractByIndex(i int) (Shape, error) {
 	if i > len(b.shapes) - 1 || i < 0 {
-		return nil, errors.New("index doesn't exist or out of the range")
+		return nil, errors.New(errMesIndexOutRange)
 	} else {
 		returnShape := b.shapes[i]
 		b.shapes = append(b.shapes[:i], b.shapes[i+1:]...)
@@ -56,7 +60,7 @@ func (b *box) ExtractByIndex(i int) (Shape, error) {
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
 	if i > len(b.shapes) - 1 || i < 0 {
-		return nil, errors.New("index doesn't exist or out of the range")
+		return nil, errors.New(errMesIndexOutRange)
 	} else {
 		returnShape := b.shapes[i]
 		b.shapes[i] = shape
@@ -72,7 +76,7 @@ func (b *box) SumPerimeter() float64 {
 		sumPerimeter += b.shapes[i].CalcPerimeter()
 	}
 	return sumPerimeter
-	panic("something went really wrong")
+	//panic("something went really wrong")
 }
 
 // SumArea provides sum area of all shapes in the list.
@@ -82,7 +86,7 @@ func (b *box) SumArea() float64 {
 		sumArea += b.shapes[i].CalcArea()
 	}
 	return sumArea
-	panic("something went really wrong")
+	//panic("something went really wrong")
 }
 
 // RemoveAllCircles removes all circles in the list
