@@ -10,5 +10,5 @@ func (r Rectangle) CalcPerimeter() float64 {
 }
 
 func (r Rectangle) CalcArea() float64 {
-	return r.Height + r.Weight
+	return r.Height * r.Weight
 }
