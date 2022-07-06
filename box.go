@@ -34,7 +34,7 @@ func (b *box) AddShape(shape Shape) error {
 // GetByIndex allows getting shape by index
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) GetByIndex(i int) (Shape, error) {
-	if len(b.shapes) - 1 < i || i < 0 {
+	if len(b.shapes)-1 < i || i < 0 {
 		return nil, errors.New(errMesIndexOutRange)
 	} else {
 		return b.shapes[i], nil
@@ -45,7 +45,7 @@ func (b *box) GetByIndex(i int) (Shape, error) {
 // ExtractByIndex allows getting shape by index and removes this shape from the list.
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) ExtractByIndex(i int) (Shape, error) {
-	if i > len(b.shapes) - 1 || i < 0 {
+	if i > len(b.shapes)-1 || i < 0 {
 		return nil, errors.New(errMesIndexOutRange)
 	} else {
 		returnShape := b.shapes[i]
@@ -59,7 +59,7 @@ func (b *box) ExtractByIndex(i int) (Shape, error) {
 // ReplaceByIndex allows replacing shape by index and returns removed shape.
 // whether shape by index doesn't exist or index went out of the range, then it returns an error
 func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
-	if i > len(b.shapes) - 1 || i < 0 {
+	if i > len(b.shapes)-1 || i < 0 {
 		return nil, errors.New(errMesIndexOutRange)
 	} else {
 		returnShape := b.shapes[i]
@@ -89,16 +89,15 @@ func (b *box) SumArea() float64 {
 	//panic("something went really wrong")
 }
 
-// RemoveAllCircles removes all circles in the list
-// whether circles are not exist in the list, then returns an error
+// RemoveAllCircles removes all circles in the list;
+// whether circles are not exist in the list returns an error
 func (b *box) RemoveAllCircles() error {
 	var removedCirclesCounter int = 0
 	for i := 0; i < len(b.shapes); {
-		switch b.shapes[i].(type) {
-		case Circle:
+		if _, ok := b.shapes[i].(*Circle); ok {
 			b.shapes = append(b.shapes[:i], b.shapes[i+1:]...)
 			removedCirclesCounter++
-		default:
+		} else {
 			i++
 		}
 	}
